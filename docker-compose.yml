@@ -1,0 +1,29 @@
+version: "3"
+services:
+  oradbxe:
+    container_name: oradb
+    build: "./oracle"
+    image: chembl/xetest
+    ports:
+      - "1521:1521"
+    networks:
+      - "leNetwork"
+    shm_size: "2gb"
+  #  proxy:
+  #    container_name: proxy
+  #    image: "./proxy"
+  #    networks: 
+  #      - "leNetwork" 
+  surechembl:
+    build: "./surechembl"
+    container_name: surechembl
+    image: chembl/surechembl
+    volumes: 
+      - ../surechembl-data-client:/opt/suredataclient
+    networks: 
+      - "leNetwork"
+
+networks:
+  leNetwork:
+    driver: bridge
+

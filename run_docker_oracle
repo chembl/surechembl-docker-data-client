@@ -1,0 +1,15 @@
+// Run XE Oracle database https://hub.docker.com/r/alexeiled/docker-oracle-xe-11g/
+docker run -d --shm-size=2g -p 1521:1521 -p 8080:8080 --name oradb alexeiled/docker-oracle-xe-11g
+hostname: localhost
+port: 1521
+sid: xe
+username: system
+password: oracle
+
+// CLEAN UP machines and images
+// Be careful, this commands will erase ALL images and instances in your system:
+docker rmi $(docker images | grep "^<none>" | awk '{print $3}')
+docker rm $(docker ps -qa)
+
+// Proxy
+docker run -d --name proxy -p 80:80 -v /var/run/docker.sock:/tmp/docker.sock:ro --network="docker_leNetwork" jwilder/nginx-proxy
