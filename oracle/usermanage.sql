@@ -25,3 +25,5 @@ GRANT create any trigger TO sc_client;
 GRANT create any procedure TO sc_client;
 GRANT create sequence TO sc_client;
 GRANT create synonym TO sc_client;
+GRANT connect to sc_client;
+GRANT ALL PRIVILEGES TO sc_client;
